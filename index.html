@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta charset="utf-8">  
+	</head>
+
+	<style>
+		#title {font-weight: bold};
+	</style>
+	
+	<body>
+
+
+		<script language="javascript">
+		var setlistObj =
+		 	[
+				{ 
+					"title" : "Let's Fall In Love For The Night",
+					"artists" : "FINNEAS", 
+				    "genres": [
+				      "Alternative", 
+				      "Indie"
+				    ],
+					"year" : "2019",
+				},
+
+				{ 
+					"title" : "Glitter",
+					"artists" : "BENEE", 
+				    "genres": [
+				      "Alternative", 
+				      "Indie"
+				    ],
+					"year" : "2019",
+				},
+
+				{ 
+					"title" : "Notre amour boit la tasse",
+					"artists" : "LOUANE", 
+					"genres" : [
+							"French Pop",
+					 	],
+					"year" : "2015",
+				},
+
+				{ 
+					"title" : "New Girl",
+					"artists" : "FINNEAS", 
+				    "genres": [
+				      "Alternative",
+				      "Indie"
+				    ],
+					"year" : "2016",
+				},
+
+				{ 
+					"title" : "Honeybee",
+				    "artists": [
+				      "The Head and the Heart"
+				    ],
+				    "genres": [
+				      "Indie"
+				    ],
+					"year" : "2011",
+				},
+
+				{ 
+					"title" : "urs",
+				    "artists": [
+				      "NIKI"
+				    ],
+				    "genres": [
+				      "Contemporary R and B"
+				    ],
+					"year" : "2019",
+				},
+
+				{ 
+					"title" : "Chelsea Dagger",
+				    "artists": [
+				      "The Fratellis"
+				    ],
+				    "genres": [
+				      "Alternative",
+				      "Indie Rock"
+				    ],
+					"year" : "2006",
+				},
+
+				{ 
+					"title" : "Holy",
+				    "artists": [
+				      "King Princess"
+				    ],
+				    "genres": [
+				      "Indie Pop",
+				    ],
+					"year" : "2018",
+				},
+
+				{ 
+					"title" : "Open Season",
+				    "artists": [
+				      "High Highs"
+				    ],
+				    "genres": [
+				      "Indie Rock",
+				    ],
+					"year" : "2011",
+				},
+
+				{ 
+					"title" : "Mariposa",
+				    "artists": [
+				      "Peach Tree Rascals"
+				    ],
+				    "genres": [
+				      "Alternative",
+				      "Indie"
+				    ],
+					"year" : "2019",
+				},
+
+				{ 
+					"title" : "clementine",
+				    "artists": [
+				      "Halsey"
+				    ],
+				    "genres": [
+				      "Alternative",
+				      "Pop"
+				    ],
+					"year" : "2019",
+				},
+
+				{ 
+					"title" : "Luck Pusher",
+				    "artists": [
+				      "FINNEAS"
+				    ],
+				    "genres": [
+				      "Alternative"
+				    ],
+					"year" : "2018",
+				},
+			];
+		</script>
+		<h1> Serialized Display:</h1>
+
+		<script language="javascript">
+	  	var sSong = "";
+		for (i = 0; i < setlistObj.length; i++)
+			  {
+				  sSong += "<p id='serializedSong" + i + "'>" + "" + "</p>";
+			   }
+		document.writeln(sSong);
+
+	    </script>	
+
+	    <h1>User Friendly Display</h1>
+
+		<script language="javascript">
+	  	var pSong = "";
+		for (i = 0; i < setlistObj.length; i++)
+			  {
+				  pSong += "<p id='pSong" + i + "'>" + "" + "</p>";
+			   }
+		document.writeln(pSong);
+
+		for (i = 0 ; i < setlistObj.length; i++) {
+			var strSong = JSON.stringify(setlistObj[i]);
+			document.getElementById("serializedSong" + i).innerHTML =
+			strSong;
+
+			var x = "";
+			var parsedSong = JSON.parse(strSong);
+			var divvar = "";
+			x += "<div id='parsedSong" + i + "'>" + "";
+	        x +=  "<div id='title'>" + parsedSong.title + "</div>";
+	        x +=  "<div id='artists'>" + "Artist: " + parsedSong.artists + "</div>";
+	        x +=  "<div id='genres'>" + "Genre: ";
+	        for (j = 0; j < parsedSong.genres.length; j++) {
+	        	x += parsedSong.genres[j];
+	        	if (j != parsedSong.genres.length - 1) {
+					x += ", ";
+	        	}
+	        }
+	        x += "</div>";
+	        x +=  "<div id='year'>" + "Released: " + parsedSong.year + "\n" + "\n" +  "</div>";
+    		x += "</div>";
+			document.getElementById("pSong" + i).innerHTML =
+			x;
+		}
+
+	function printSongs() {
+		var genre = document.getElementById("genrepicker").value;
+
+		var resultList = ""
+		for (i = 0 ; i < setlistObj.length; i++) {
+
+			for (j = 0; j < setlistObj[i].genres.length; j++) {
+				if (setlistObj[i].genres[j] == genre) {
+					resultList += "<div>"
+					resultList += setlistObj[i].title;
+					resultList += "</div>"
+				}
+			}
+		}
+		document.getElementById("genreList").innerHTML = resultList;
+	}
+
+	</script language="javascript">
+
+	<h1> Song Selector </h1>
+	<select id="genrepicker" onchange="printSongs()">
+	    	<option>Display Songs From Genre</option>
+	    	<option value="Alternative">Alternative</option>
+	    	<option value="Contemporary R and B">Contemporary R and B</option>
+	    	<option value="Pop">Pop</option>
+	    	<option value="Indie">Indie</option>	
+			<option value="Indie Rock">Indie Rock</option>	
+			<option value="Indie Pop">Indie Pop</option>
+			<option value="French Pop">French Pop</option>				      	
+	</select>
+
+	<div id="genreList">&nbsp;</div>	
+
+
+
+	</body>
+
+</html>
